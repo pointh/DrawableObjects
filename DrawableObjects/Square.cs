@@ -37,6 +37,8 @@ namespace DrawableObjects
                 Stroke = Brushes.Red,
             };
 
+            // Ve WPF není absolutní pozicování elementů,
+            // ale r má svůj canvas a ten se může posunovat.
             Canvas.SetLeft(r, Position.X);
             Canvas.SetTop(r, Position.Y);
             DrawSpace.Children.Add(r);
@@ -44,7 +46,12 @@ namespace DrawableObjects
 
         public void ReDraw(double scale = 1.0)
         {
+            // Zruš aktuální projení mezi kreslicí plochou
+            // a starým Rectangle, GC se postará o zbytek
+            // (žádná reference na r)
             DrawSpace.Children.Remove(r);
+
+            // Vytvoř a vykresli nový Rectangle
             Draw(scale);
         }
 
