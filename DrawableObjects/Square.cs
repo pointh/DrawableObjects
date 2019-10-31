@@ -13,15 +13,25 @@ namespace DrawableObjects
     class Square : IDrawable
     {
         public Point Position { get; set; }
-        public Canvas DrawSpace { get; set; }
+        public Canvas DrawSpace { get; }
 
-        public int Size { get; set; }
+        public int Size { get; }
+
+        private Rectangle r;
+
+        public Square(Point positon, int size, Canvas canvas)
+        {
+            Size = size;
+            Position = positon;
+            DrawSpace = canvas;
+            // Nekresli mimo hranice kreslicí plochy
+            DrawSpace.ClipToBounds = true;
+        }
 
         public void Draw(double scale = 1.0)
         {
-            Rectangle r = new Rectangle
+            r = new Rectangle
             {
-                Name = "r",
                 Width = (int)(scale*Size),
                 Height = (int)(scale*Size),
                 Stroke = Brushes.Red,
@@ -34,15 +44,15 @@ namespace DrawableObjects
 
         public void ReDraw(double scale = 1.0)
         {
-            DrawSpace.Children.RemoveAt(0);
+            DrawSpace.Children.Remove(r);
             Draw(scale);
         }
 
-        public Square(Point positon, int size, Canvas canvas)
+        public void MoveTo(double x, double y)
         {
-            Size = size;
-            Position = positon;
-            DrawSpace = canvas;
+            Position = new Point(x, y);
         }
+
+
     }
 }

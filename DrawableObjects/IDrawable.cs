@@ -11,7 +11,7 @@ namespace DrawableObjects
     interface IDrawable
     {
         Point Position { get; set; }
-        Canvas DrawSpace { get; set; }
+        Canvas DrawSpace { get; }
         void Draw(double scale);
     }
 }

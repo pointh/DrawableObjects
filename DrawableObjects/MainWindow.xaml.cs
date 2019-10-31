@@ -36,6 +36,14 @@ namespace DrawableObjects
             SizeSlider.ValueChanged += SizeSliderValueChanged;
         }
 
+        private void ButtonMove_Click(object sender, RoutedEventArgs e)
+        {
+            s.MoveTo(s.Position.X+10, s.Position.Y+10);
+            t.MoveTo(t.Position.X + 20, t.Position.Y + 6);
+            s.ReDraw();
+            t.ReDraw();
+        }
+
         private void SizeSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             s.ReDraw(e.NewValue);
