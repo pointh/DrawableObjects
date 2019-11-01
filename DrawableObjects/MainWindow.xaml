@@ -36,8 +36,10 @@
                         VerticalAlignment="Bottom" Width="120" Height="25"/>
             </Grid>
         </Button>
-        <Slider Grid.Column="3" Grid.Row="2" x:Name="SizeSlider" HorizontalAlignment="Left" VerticalAlignment="Center" 
+        <Slider Grid.Column="3" Grid.Row="2" x:Name="SizeSlider" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
                 Width="{Binding Width, ElementName=MainCanvas}" 
-                Maximum="1" LargeChange="0.1" Value="1" SmallChange="0.05" TickFrequency="10"/>
+                Maximum="1" LargeChange="0.1" Value="1" SmallChange="0.05" TickFrequency="10" Margin="0,0,0,10"/>
+        <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Size}" VerticalAlignment="Top" x:Name="SizeInfo" 
+                Width="{Binding Width, ElementName=MainCanvas}" Height="20" Margin="0, 10, 0, 0"/>
     </Grid>
 </Window>

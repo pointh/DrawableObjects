@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace DrawableObjects
 {
-    class Square : IDrawable
+    public class Square : IDrawable
     {
         public Point Position { get; set; }
         public Canvas DrawSpace { get; }
@@ -27,6 +27,9 @@ namespace DrawableObjects
             // Nekresli mimo hranice kreslicí plochy
             DrawSpace.ClipToBounds = true;
         }
+
+        public Square() : this(new Point(0, 0), 100, null)
+        { }
 
         public void Draw(double scale = 1.0)
         {
@@ -60,6 +63,9 @@ namespace DrawableObjects
             Position = new Point(x, y);
         }
 
-
+        public override string ToString()
+        {
+            return $"{Size}x{Size}";
+        }
     }
 }

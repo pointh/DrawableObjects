@@ -20,12 +20,14 @@ namespace DrawableObjects
     /// </summary>
     public partial class MainWindow : Window
     {
-        Square s, t;
+        Square s { get; set; }
+        Square t { get; set; }
         public MainWindow()
         {
             InitializeComponent();
             s = new Square(new Point(20.0, 30.0), 200, MainCanvas);
             t = new Square(new Point(60.0, 78.0), 120, MainCanvas);
+            this.DataContext = s;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
