@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Shapes;
+using System.Windows.Shapes; // tady jsou základní tvary - čára, elipsa, polyline, ....
 using System.Windows.Media;
+using System.Diagnostics;
 
 namespace DrawableObjects
 {
     public class Square : IDrawable
     {
         public Point Position { get; set; }
+
         public Canvas DrawSpace { get; }
 
         public int Size { get; }
 
         private Rectangle r;
+
 
         public Square(Point positon, int size, Canvas canvas)
         {
@@ -28,15 +27,19 @@ namespace DrawableObjects
             DrawSpace.ClipToBounds = true;
         }
 
+        public Square(Square s) : this(s.Position, s.Size, s.DrawSpace)
+        { }
+
         public Square() : this(new Point(0, 0), 100, null)
         { }
 
         public void Draw(double scale = 1.0)
         {
+            DrawSpace.Children.Remove(r);
             r = new Rectangle
             {
-                Width = (int)(scale*Size),
-                Height = (int)(scale*Size),
+                Width = (int)(scale * Size),
+                Height = (int)(scale * Size),
                 Stroke = Brushes.Red,
             };
 
@@ -47,25 +50,21 @@ namespace DrawableObjects
             DrawSpace.Children.Add(r);
         }
 
-        public void ReDraw(double scale = 1.0)
-        {
-            // Zruš aktuální projení mezi kreslicí plochou
-            // a starým Rectangle, GC se postará o zbytek
-            // (žádná reference na r)
-            DrawSpace.Children.Remove(r);
-
-            // Vytvoř a vykresli nový Rectangle
-            Draw(scale);
-        }
-
-        public void MoveTo(double x, double y)
+        public IDrawable MoveTo(double x, double y)
         {
             Position = new Point(x, y);
+            DrawSpace.Children.Remove(r);
+            return new Square(new Point(x, y), this.Size, this.DrawSpace);
+        }
+
+        public IDrawable CopyTo(double x, double y)
+        {
+            return new Square(new Point(x,y), this.Size, this.DrawSpace);
         }
 
         public override string ToString()
         {
-            return $"{Size}x{Size}";
+            return $"{Position.X}, {Position.Y} : {Size}x{Size}";
         }
     }
 }

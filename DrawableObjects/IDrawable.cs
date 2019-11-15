@@ -8,10 +8,12 @@ using System.Windows.Controls;
 
 namespace DrawableObjects
 {
-    interface IDrawable
+    public interface IDrawable
     {
         Point Position { get; set; }
         Canvas DrawSpace { get; }
-        void Draw(double scale);
+        void Draw(double scale = 1.0);
+        IDrawable MoveTo(double x, double y);
+        IDrawable CopyTo(double x, double y);
     }
 }
