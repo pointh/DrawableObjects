@@ -29,7 +29,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <Button  Grid.Row="0" x:Name="ButtonDraw" Content="Draw" Click="Button_Click"/>
+            <Button  Grid.Row="0" x:Name="ButtonDraw" Content="Draw" Click="ButtonDraw_Click"/>
             <Button Grid.Row="1" x:Name="ButtonMove" Content="Move"  Click="ButtonMove_Click"/>
             <Button Grid.Row="2" x:Name="ButtonCopy" Content="Copy" Click="ButtonCopy_Click"/>
             <ListView Grid.Row="3" x:Name="Entities" ItemsSource="{Binding}"/>

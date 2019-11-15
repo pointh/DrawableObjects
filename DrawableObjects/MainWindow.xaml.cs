@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
 namespace DrawableObjects
@@ -21,19 +9,19 @@ namespace DrawableObjects
     /// </summary>
     public partial class MainWindow : Window
     {
-        //List<IDrawable> DrawableObjects = new List<IDrawable>();
-        ObservableCollection<IDrawable> DrawableObjects = new ObservableCollection<IDrawable>();
+        private ObservableCollection<IDrawable> DrawableObjects = new ObservableCollection<IDrawable>();
         public MainWindow()
         {
             InitializeComponent();
             DrawableObjects.Add(new Square(new Point(20.0, 30.0), 200, MainCanvas));
             DrawableObjects.Add(new Square(new Point(60.0, 78.0), 120, MainCanvas));
+            DrawableObjects.Add(new Circle(new Point(0.0, 28.0), 120, MainCanvas));
 
             // všechny prvky nemusí sdílet tentýž DataContext - každý prvek může mít svůj
             this.DataContext = DrawableObjects;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonDraw_Click(object sender, RoutedEventArgs e)
         {
             foreach (var v in DrawableObjects)
                 v.Draw();
